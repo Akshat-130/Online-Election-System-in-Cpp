@@ -1,0 +1,343 @@
+#include<iostream>
+#include<string>
+//#include<stdlib.h>
+//#define CANDIDATE_COUNT
+#define CANDIDATE1 "Vladimir Putin"
+#define CANDIDATE2 "Kim Jong-un"
+#define CANDIDATE3 "Narendra Modi"
+#define CANDIDATE4 "Joe Biden"
+#define CANDIDATE5 "NOTA"
+using namespace std;
+static int i=0;
+
+class info
+{
+    protected:
+    int voter_id[50];
+    string voter_name[50];
+    string voter_surname[50];
+    string voter_phone[50];
+    string voter_password[50];
+    int voter_check[50];
+    int votesCount1=0;
+    int votesCount2=0;
+    int votesCount3=0;
+    int votesCount4=0;
+    int votesCount5=0;
+    int inValidvotes=0;
+};
+
+class interface
+{
+    public:
+    void interface1();
+    void interface2();
+};
+
+class voter:virtual public info,virtual public interface
+{
+    public:
+    void check_required();
+    void voter_registration();
+};
+
+class vote:public voter
+{
+    public:
+    void voter_login();
+    void cast_vote();
+};
+
+class officer:virtual public info,virtual public interface
+{
+    private:
+    string vigilance_password="#Good@Officer";
+    string entered_password;
+    public:
+    void vote_count();
+    void get_leadingcandidate();
+    void vigilance_officer();
+};
+
+class menu:public vote,public officer
+{
+    public:
+    void main_menu();
+};
+
+void interface::interface1()
+{
+    cout<<"\n\t\t\t|===============================================|";
+    cout<<"\n\t\t\t|=====       ONLINE ELECTION SYSTEM       ======|";
+    cout<<"\n\t\t\t|=====            C++ PROJECT             ======|";
+    cout<<"\n\t\t\t|===============================================|";
+    cout<<"\n";
+    //getc;
+}
+
+void interface::interface2()
+{
+    cout<<"\n\t\t\t|===============================================|";
+    cout<<"\n\t\t\t|=====    WELCOME TO ELECTIONS - 2022     ======|";
+    cout<<"\n\t\t\t|===============================================|";
+    cout<<"\n";
+    //getc;
+}
+
+void voter::check_required()
+{
+    int noo=0;
+    for(noo=0;noo<50;noo++)
+    {
+        voter_check[noo]=0;
+    }
+    getc;
+}
+
+void voter::voter_registration()
+{
+    system("cls");
+    interface1();
+    interface2();
+    static int x=0;
+    static int id=3458889;
+    /*for(int i=0;i<50;i++)
+    {*/
+    check_required();
+    cout<<"\n\t\t Your voter id is "<<id;
+    cout<<"\n\t\t Please enter the voter id alloted to you: ";
+    cin>>voter_id[i];
+    cout<<"\n\t\t Enter your name: ";
+    cin>>voter_name[i];
+    cout<<"\n\t\t Enter your surname: ";
+    cin>>voter_surname[i];
+    cout<<"\n\t\t Enter your phone number: ";
+    cin>>voter_phone[i];
+    cout<<"\n\t\t Enter your password: ";
+    cin>>voter_password[i];
+    cout<<"\n\t\t You have successfully completed the registration!!!";
+    voter_check[i] = 1;
+    //x++;
+    i++;
+    id++;
+    /*break;
+    }*/
+    fflush(stdin);
+    getchar();
+}
+
+void vote::voter_login()
+{
+    system("cls");
+    interface1();
+    interface2();
+    int choice_voter;
+    do
+    {
+        system("cls");
+        interface1();
+        interface2();
+        cout<<"\n\t\t If you are a new voter please register yourself first by selecting choice 2";
+        cout<<"\n\t\t 1. Cast your vote";
+        cout<<"\n\t\t 2. Voter registration";
+        cout<<"\n\t\t 3. Back";
+        cout<<"\n\t\t Please enter your choice:";
+        cin>>choice_voter;
+
+        switch(choice_voter)
+        {
+            case 1: cast_vote();break;
+            case 2: voter_registration();break;
+            case 3: cout<<"\n Home page";system("cls");break;
+            default: cout<<"\n Kindly give a valid Input!";
+        }
+    }
+    while(choice_voter!=3);
+    fflush(stdin);
+    //getchar();
+}
+
+void vote::cast_vote()
+{
+    system("cls");
+    interface1();
+    interface2();
+    int choice;
+    int var;
+    int hi=0,ji=0;
+    int hii=0;
+    string passwerd;
+    cout<<"\n\t\t Enter your voter id : ";
+    cin>>var;
+    for(hi=0,ji=0;hi<i || ji<=i;hi++,ji++)
+    {
+        if(var==voter_id[hi])
+        {
+            do
+            {
+                cout<<"\n\t\t Enter your password: ";
+                cin>>passwerd;
+                if(voter_password[hi]==passwerd)
+                {
+                    if(voter_check[hi]==1)
+                    {
+                        cout<<"\n\t\t Voter name : "<<voter_name[hi];
+                        cout<<"\n\t\t ### Please choose your Candidate ####";
+                        cout<<"\n\t\t 1. "<<CANDIDATE1;
+                        cout<<"\n\t\t 2. "<<CANDIDATE2;
+                        cout<<"\n\t\t 3. "<<CANDIDATE3;
+                        cout<<"\n\t\t 4. "<<CANDIDATE4;
+                        cout<<"\n\t\t 5. "<<CANDIDATE5;
+
+                        cout<<"\n\n Input your choice (1 - 5) : ";
+                        cin>>choice;
+
+                        switch(choice)
+                        {
+                            case 1: votesCount1++; break;
+                            case 2: votesCount2++; break;
+                            case 3: votesCount3++; break;
+                            case 4: votesCount4++; break;
+                            case 5: votesCount5++; break;
+                            default: inValidvotes++;
+                        }
+                        voter_check[hi]++;
+                    }
+                    else
+                    {
+                        cout<<"\n\t\t Sorry you have already voted!!!";
+                    }
+                    hii=0;
+                }
+                else
+                {
+                    cout<<"\n\t\tYou have entered the password incorrectly!!!";
+                    cout<<"\n\t\t Please re-enter the password correctly.....";
+                    hii++;
+                }
+            }while(hii!=0 && hii<=3);
+            break;
+        }
+        if(ji==i)
+        {
+            cout<<"\n\t\t Sorry the voter id does not exist!!!";
+            break;
+        }
+    }
+    cout<<"\n\t\tThank you for voting";
+    fflush(stdin);
+    getchar();
+}
+
+void officer::vote_count()
+{
+    system("cls");
+    interface1();
+    interface2();
+    cout<<"\n\t\t ##### Voting Statics ####";
+    cout<<"\n\t\t"<< CANDIDATE1<< "     "<<votesCount1;
+    cout<<"\n\t\t"<< CANDIDATE2<<  "        "<<votesCount2;
+    cout<<"\n\t\t"<< CANDIDATE3<<  "      "<<votesCount3;
+    cout<<"\n\t\t"<< CANDIDATE4<<  "          "<<votesCount4;
+    cout<<"\n\t\t"<< CANDIDATE5<<  "               "<<votesCount5;
+    fflush(stdin);
+    getchar();
+}
+
+void officer::get_leadingcandidate()
+{
+    system("cls");
+    interface1();
+    interface2();
+    cout<<"\n\n  #### Leading Candiate ####\n\n";
+    if(votesCount1>votesCount2 && votesCount1>votesCount3 && votesCount1 >votesCount4)
+    cout<<CANDIDATE1;
+    else if (votesCount2>votesCount3 && votesCount2>votesCount4 && votesCount2 >votesCount1)
+    cout<<CANDIDATE2;
+    else if(votesCount3>votesCount4 && votesCount3>votesCount2 && votesCount3 >votesCount1)
+    cout<<CANDIDATE3;
+    else if(votesCount4>votesCount1 && votesCount4>votesCount2 && votesCount4 >votesCount3)
+    cout<<CANDIDATE4;
+    else
+    cout<<"----- Warning !!! No-win situation----";
+    fflush(stdin);
+    getchar();
+}
+
+void officer::vigilance_officer()
+{
+    system("cls");
+    interface1();
+    interface2();
+    cout<<"\n\t\tEnter the pre-set password: ";
+    cin>>entered_password;
+    if(vigilance_password==entered_password)
+    {
+        int choice_officer=0;
+        do
+        {
+            system("cls");
+            interface1();
+            interface2();
+            cout<<"\n\t\t 1. Find Vote Count";
+            cout<<"\n\t\t 2. Find leading Candidate";
+            cout<<"\n\t\t 3. Back";
+
+            cout<<"\n\t\t Please enter your choice : ";
+            cin>>choice_officer;
+
+            switch(choice_officer)
+            {
+                case 1: vote_count();break;
+                case 2: get_leadingcandidate();break;
+                case 3: cout<<"\n Home page";system("cls");break;
+                default: cout<<"\n Kindly give a valid Input!";
+            }
+      }while(choice_officer!=3);
+    }
+    else
+    {
+        cout<<"\n\t\t Please renter the password correctly";
+    }
+    fflush(stdin);
+    //getchar();
+}
+
+void menu::main_menu()
+{
+    system("cls");
+
+    int i;
+    int choice;
+
+    while(1)
+    {
+        interface1();
+        interface2();
+        cout<<"\n\t\t\t-------------------------------------------------";
+        cout<<"\n\t\t\t-------                LOGIN               ------";
+        cout<<"\n\t\t\t-------------------------------------------------";
+        cout<<"\n\t\t\t-------        1. Vigilance officer        ------";
+        cout<<"\n\t\t\t-------              2. Voter              ------";
+        cout<<"\n\t\t\t-------              3. Exit               ------";
+        cout<<"\n\t\t\t-------------------------------------------------";
+        cout<<"\n\t\t\tPlease enter your choice : ";
+        cin>>choice;
+        switch(choice)
+        {
+            case 1: vigilance_officer();break;
+            case 2: voter_login();break;
+            case 3: cout<<"\n Session ended";exit(0);break;
+            default: system("cls");cout<<" Kindly give a valid Input!\n ";break;
+        }
+    }
+    fflush(stdin);
+    getchar();
+}
+
+int main()
+{
+    menu m;
+    m.main_menu();
+    return 0;
+}
